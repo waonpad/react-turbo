@@ -10,10 +10,13 @@ import { sum } from '@/sample/sum';
 jest.spyOn(spyModule, 'spyRand');
 
 // 内部モジュールのモック化
-jest.mock('../../src/sample/mock/mock');
+jest.mock('../../../../src/sample/mock/mock');
 
 // 外部モジュールのモック化
 jest.mock('axios');
+
+// sum 関数のモック化 // 追加
+jest.mock('../../../../src/sample/sum');
 
 describe('内部モジュールの mock を行う', () => {
   test('モックの戻り値を設定する, パターン1', () => {
