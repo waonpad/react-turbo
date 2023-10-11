@@ -1,7 +1,9 @@
 module.exports = {
-  root: true, // これが無いと上層を探しに行ってしまう
-  extends: ['custom/next'],
+  // root: true,
+  extends: ['custom/react'],
   parserOptions: {
-    project: './tsconfig.json',
+    project: 'tsconfig.json',
+    tsconfigRootDir: __dirname,
+    sourceType: 'module',
   },
 };
