@@ -10,6 +10,8 @@ export const createEnv = ({ runtimeEnv }: { runtimeEnv: NodeJS.ProcessEnv }) => 
       VITE_API_URL: z.string().url(),
       VITE_APP_NAME: z.string(),
       VITE_HOST_URL: z.string().url(),
+
+      VITE_GOOGLE_CLIENT_ID: z.string(),
     },
     runtimeEnv: runtimeEnv,
     emptyStringAsUndefined: true,

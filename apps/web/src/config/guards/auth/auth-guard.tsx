@@ -7,13 +7,13 @@ const PRIVATE: Path[] = ['/private', '/about'];
 const PUBLIC: Path[] = ['/login'];
 
 export const Guard = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
-  const auth = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
   const marches = useMatches();
 
-  const authedOnPublicPath = auth.token && PUBLIC.includes(location.pathname as Path);
+  const authedOnPublicPath = user && PUBLIC.includes(location.pathname as Path);
   const unAuthedOnPrivatePath =
-    !auth.token && PRIVATE.some((path) => marches.some((match) => matchPath(path, match.pathname)));
+    !user && PRIVATE.some((path) => marches.some((match) => matchPath(path, match.pathname)));
 
   if (authedOnPublicPath) return <Navigate to="/" replace />;
   if (unAuthedOnPrivatePath)
