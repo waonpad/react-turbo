@@ -24,8 +24,4 @@ export class Env {
   get Port(): number {
     return this.configService.get('PORT');
   }
-
-  get NextAuthSecret(): string {
-    return this.configService.get('NEXTAUTH_SECRET');
-  }
 }

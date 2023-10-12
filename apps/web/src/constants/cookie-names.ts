@@ -1,3 +1,3 @@
-export const cookieNames = {
-  authToken: 'react-oauth-token',
+export const COOKIE_NAMES = {
+  AUTH_TOKEN: 'react-oauth-token',
 };

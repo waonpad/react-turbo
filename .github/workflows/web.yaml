@@ -23,9 +23,9 @@ env:
   # t3-envがCI環境でも動くため、ダミーでエラーを回避する
   VITE_APP_ENV: production
   VITE_API_URL: http://localhost:3000
-  VITE_APP_NAME: "VITE APP"
+  VITE_APP_NAME: 'VITE APP'
   VITE_HOST_URL: http://localhost:8080
-
+  VITE_GOOGLE_CLIENT_ID: 'dummy'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

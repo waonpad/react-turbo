@@ -1,5 +1,6 @@
 import { writeFileSync } from 'fs';
 import * as path from 'path';
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { dump } from 'js-yaml';
@@ -15,6 +16,13 @@ async function bootstrap() {
     origin: '*',
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   }); // CORSを有効化
+
+  app.useGlobalPipes(
+    // DTOによるバリデーションで、型変換を自動で行う
+    new ValidationPipe({
+      transform: true,
+    })
+  );
 
   // Setting Swagger API
   const config = new DocumentBuilder()

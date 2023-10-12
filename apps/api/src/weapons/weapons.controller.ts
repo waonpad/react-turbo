@@ -7,14 +7,17 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { Weapon } from 'database';
 import { Request } from 'express';
-import { NextAuthGuard } from 'src/next-auth/next-auth.guard';
-import { AuthUser } from 'src/user/auth-user';
+import { PageNumberPagination } from 'prisma-extension-pagination/dist/types';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { PageNumberPaginationOptionsDto } from 'src/common/dto/page-number-pagination-options.dto';
+import { JwtDecodedUser } from 'src/user/jwt-decoded-user';
 import { User } from 'src/user/user.decorator';
 import { CreateWeaponDto } from './dto/create-weapon.dto';
 import { UpdateWeaponDto } from './dto/update-weapon.dto';
@@ -27,10 +30,21 @@ export class WeaponsController {
 
   @Get()
   @HttpCode(200)
-  // @UseGuards(NextAuthGuard)
+  // @UseGuards(AuthGuard)
   // @Api〇〇() でswagger用のタグをいろいろつけられる
   async getAllWeapons(): Promise<Weapon[]> {
     return this.weaponsService.getAllWeapons();
+  }
+
+  // :id より上に書かないと:idがpagesとして扱われてしまう
+  @Get('pages')
+  @HttpCode(200)
+  async getAllWeaponsWithPages(
+    @Query() options: PageNumberPaginationOptionsDto
+  ): Promise<[Weapon[], PageNumberPagination]> {
+    console.log(options);
+
+    return this.weaponsService.getAllWeaponsWithPages(options);
   }
 
   @Get(':id')
@@ -46,7 +60,7 @@ export class WeaponsController {
     return this.weaponsService.getWeapon(+id);
   }
 
-  @UseGuards(NextAuthGuard)
+  @UseGuards(AuthGuard)
   @Post()
   async create(
     @Body()
@@ -54,7 +68,7 @@ export class WeaponsController {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Req() request: Request, // NextAuthで認証したユーザー情報を取得する
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    @User() user: AuthUser
+    @User() user: JwtDecodedUser
   ): Promise<Weapon> {
     // console.log(request);
     // console.log(user);
@@ -68,7 +82,7 @@ export class WeaponsController {
     type: Number,
     example: 1,
   })
-  @UseGuards(NextAuthGuard)
+  @UseGuards(AuthGuard)
   async update(
     @Param('id')
     id: string,
@@ -84,7 +98,7 @@ export class WeaponsController {
     type: Number,
     example: 1,
   })
-  @UseGuards(NextAuthGuard)
+  @UseGuards(AuthGuard)
   async delete(
     @Param('id')
     id: string
