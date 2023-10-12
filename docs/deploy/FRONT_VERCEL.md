@@ -14,11 +14,8 @@
 当然, ローカルの環境変数のままでは動かない  
 以下のように設定する
 
-DATABASE_URL: <DBのホスティング先URL>  
-NEST_API_URL: <バックエンドのホスティング先URL>/  
-NEXT_PUBLIC_HOST_URL: https://<プロジェクト名>.vercel.app/  
-NEXTAUTH_URL: https://<プロジェクト名>.vercel.app  
-NEXTAUTH_SECRET: <バックエンドのホスティング先と同じ値>
+VITE_API_URL: <バックエンドのホスティング先URL>  
+VITE_HOST_URL: https://<プロジェクト名>.vercel.app
 
 ### OAuth認証が通るようにする
 
@@ -26,7 +23,7 @@ NEXTAUTH_SECRET: <バックエンドのホスティング先と同じ値>
 以下をそれぞれ追加する
 
 - `Authorized JavaScript origins` に https://<プロジェクト名>.vercel.app
-- `Authorized redirect URIs` に https://<プロジェクト名>.vercel.app/api/auth/callback/google
+- `Authorized redirect URIs` に https://<プロジェクト名>.vercel.app
 
 ### 自動デプロイを止める, 条件をつける
 

@@ -27,7 +27,6 @@ git clone <リポジトリURL>.git
 以下のコマンドで,
 
 - (`.env.*example`)を全てコピーし, 設定可能にする
-- 認証に使うsecretを生成し、`api`, `web`の環境変数に設定
 - パッケージのインストール
 - DBコンテナの起動と初回マイグレーション
 
@@ -45,7 +44,7 @@ Google CloudでOAuth認証をセットアップする
 2. `+ CREATE CREDENTIALS` をクリック
 3. `OAuth client ID` を選択
 4. `Application type` に `Web application` を選択
-5. `Authorized JavaScript origins` に `http://localhost:8080` を追加
-6. `Authorized redirect URIs` に `http://localhost:8080/api/auth/callback/google` を追加
+5. `Authorized JavaScript origins` に `http://localhost:8080`, `http://localhost` を追加
+6. `Authorized redirect URIs` に `http://localhost:8080`, `http://localhost` を追加
 7. `CREATE` をクリックし, 作成が完了するとClient IDとClient secretが表示される
-8. それぞれ `<rootDir>/apps/web/.env` の対応する行に設定
+8. Client ID を `<rootDir>/apps/web/.env` の対応する行に設定
