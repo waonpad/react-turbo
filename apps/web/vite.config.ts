@@ -1,5 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
+import generouted from '@generouted/react-router/plugin';
 
 const createEnv = require('./src/constants/env/createEnv').createEnv;
 
@@ -11,7 +12,17 @@ export default ({ mode }) => {
   createEnv({ runtimeEnv: process.env });
 
   return defineConfig({
-    plugins: [react()],
+    plugins: [
+      react(),
+      generouted({
+        source: {
+          routes: './src/pages/**/[\\w[-]*.{jsx,tsx}',
+          modals: './src/pages/**/[+]*.{jsx,tsx}',
+        },
+        output: './src/router.ts',
+      }),
+    ],
+    resolve: { alias: { '@': '/src' } },
     server: {
       port: 8080,
     },
