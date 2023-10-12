@@ -6,10 +6,10 @@
 - ✅ [NestJS](https://docs.nestjs.com)
   - ✅ Prisma
   - ✅ APIドキュメント生成, [Dredd](https://dredd.org/en/latest/)によるテスト
-- ✅ [Next.js](https://nextjs.org/docs)
-  - ✅ Prisma
+- ✅ [React](https://react.dev)
+  - ✅ [Vite](https://ja.vitejs.dev)
+  - ✅ [Generouted](https://github.com/oedotme/generouted) ファイルベースルーティング
   - ✅ Tailwind
-- ✅ [Auth.js](https://authjs.dev/getting-started/oauth-tutorial)を使ったOAuth認証
 - ✅ [Storybook](https://storybook.js.org/docs/react/get-started/whats-a-story)
 - ✅ jestによるテスト
 - ✅ 環境変数バリデーション
@@ -26,7 +26,7 @@
 
 - `apps`
   - `api`: [NestJS](https://docs.nestjs.com) のバックエンド
-  - `web`: [Next.js](https://nextjs.org/docs) のフロントエンド
+  - `web`: [React](https://react.dev) のフロントエンド
   - `workshop`: [Storybook](https://storybook.js.org/docs/react/get-started/whats-a-story) のUIカタログ
 - `packages`
   - `database`: `api`, `web` で使われる, PrismaClientのラッパー

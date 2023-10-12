@@ -15,7 +15,7 @@ nps dev
 
 - http://localhost:3000: `api` (NestJS)
 - http://localhost:3000/api: `api` のAPIドキュメント
-- http://localhost:8080: `web` (Next.js)
+- http://localhost:8080: `web` (React)
 - http://localhost:6006: `workshop` (Storybook)
 - http://localhost:3306: MySql
 
