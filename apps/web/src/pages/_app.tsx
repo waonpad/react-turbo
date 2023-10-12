@@ -8,12 +8,12 @@ import { CookiesProvider } from 'react-cookie';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
 
+import { AuthGuard } from '@/auth/auth-guard';
+import { AuthProvider } from '@/auth/auth-provider';
 import { ErrorFallback } from '@/components/elements/error-fallback';
 import { SuspenseFallback } from '@/components/elements/suspense-fallback';
 import { MainLayout } from '@/components/layout/main';
-import { Guard } from '@/config/guards/auth/auth-guard';
 import { env } from '@/constants/env';
-import { AuthProvider } from '@/context/auth/auth-provider';
 import { queryClient } from '@/lib/react-query';
 import { ToastProvider } from '@/lib/react-toastify';
 import { Link, useModals, useNavigate } from '@/router';
@@ -41,12 +41,13 @@ export default function App() {
               <AuthProvider>
                 <GoogleOAuthProvider clientId={env.VITE_GOOGLE_CLIENT_ID}>
                   <ToastProvider />
-                  <Guard>
+                  <AuthGuard>
                     <MainLayout>
                       <section style={{ margin: 24 }}>
                         <header style={{ display: 'flex', gap: 24 }}>
                           <Link to="/">Home</Link>
                           <Link to={{ pathname: '/about' }}>About</Link>
+                          <Link to="/weapons">Weapons</Link>
                           <Link to="/posts">Posts</Link>
                           <Link to="/posts/:id/:pid?" params={{ id: '1', pid: '2' }}>
                             Posts by id/pid
@@ -54,6 +55,8 @@ export default function App() {
                           <Link to="/posts/:id" params={{ id: 'id' }}>
                             Posts by id
                           </Link>
+                          <Link to="/login">Login</Link>
+                          <Link to="/logout">Logout</Link>
                           <button onClick={() => modals.open('/modal')}>
                             Global modal at current route
                           </button>
@@ -68,7 +71,7 @@ export default function App() {
                       </section>
                     </MainLayout>
                     <Modals />
-                  </Guard>
+                  </AuthGuard>
                 </GoogleOAuthProvider>
               </AuthProvider>
             </QueryClientProvider>

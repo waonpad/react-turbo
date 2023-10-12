@@ -1,34 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ErrorResponse } from 'react-router-dom';
-
-import { QueryClient } from '@tanstack/react-query';
+import {
+  UseQueryOptions,
+  UseInfiniteQueryOptions,
+  UseMutationOptions,
+} from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 
 import { MutationErrorResponse } from '@/types';
-
-import type {
-  UseQueryOptions,
-  UseMutationOptions,
-  DefaultOptions,
-  UseInfiniteQueryOptions,
-} from '@tanstack/react-query';
-import type { AxiosError } from 'axios';
-
-const queryConfig: DefaultOptions<AxiosError<ErrorResponse | MutationErrorResponse<any>>> = {
-  queries: {
-    useErrorBoundary: true,
-    refetchOnWindowFocus: false,
-    retry: false,
-    suspense: true,
-  },
-  mutations: {
-    useErrorBoundary: (error: AxiosError<ErrorResponse | MutationErrorResponse<any>>) => {
-      // Custom error handling
-      return error.response?.status !== 400;
-    },
-  },
-};
-
-export const queryClient = new QueryClient({ defaultOptions: queryConfig as DefaultOptions });
 
 export type ExtractFnReturnType<FnType extends (...args: any) => any> =
   ReturnType<FnType> extends Promise<infer T> ? T : ReturnType<FnType>;

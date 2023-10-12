@@ -1,4 +1,4 @@
-import { useAuth } from '@/context/auth/use-auth';
+import { useAuth } from '@/auth/use-auth';
 
 export default function Logout() {
   const auth = useAuth();

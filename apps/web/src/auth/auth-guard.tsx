@@ -1,12 +1,12 @@
 import { matchPath, Navigate, useLocation, useMatches } from 'react-router-dom';
 
-import { useAuth } from '@/context/auth/use-auth';
+import { useAuth } from '@/auth/use-auth';
 import type { Path } from '@/router';
 
 const PRIVATE: Path[] = ['/private', '/about'];
 const PUBLIC: Path[] = ['/login'];
 
-export const Guard = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
+export const AuthGuard = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
   const { user } = useAuth();
   const location = useLocation();
   const marches = useMatches();

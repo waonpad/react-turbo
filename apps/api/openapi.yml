@@ -36,6 +36,14 @@ paths:
         '201':
           description: ''
       tags: *ref_0
+  /weapons/pages:
+    get:
+      operationId: WeaponsController_getAllWeaponsWithPages
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_0
   /weapons/{id}:
     get:
       operationId: WeaponsController_getWeapon
@@ -82,6 +90,23 @@ paths:
         '200':
           description: ''
       tags: *ref_0
+  /auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_1
+        - auth
+  /auth/me:
+    get:
+      operationId: AuthController_me
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: *ref_1
 info:
   title: DQ Weapons API
   description: The DQ Weapons API description

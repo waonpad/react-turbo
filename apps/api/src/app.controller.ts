@@ -1,8 +1,8 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 import { AppService } from './app.service';
-import { NextAuthGuard } from './next-auth/next-auth.guard';
-import { AuthUser } from './user/auth-user';
+import { AuthGuard } from './auth/auth.guard';
+import { JwtDecodedUser } from './user/jwt-decoded-user';
 
 @Controller()
 export class AppController {
@@ -13,9 +13,9 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @UseGuards(NextAuthGuard)
+  @UseGuards(AuthGuard)
   @Get('danger')
-  getDanger(@Req() req: Request): AuthUser {
+  getDanger(@Req() req: Request): JwtDecodedUser {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return req.user;
   }

@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Weapon } from 'database';
+import {
+  PageNumberPagination,
+  PageNumberPaginationOptions,
+} from 'prisma-extension-pagination/dist/types';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateWeaponDto } from './dto/create-weapon.dto';
 import { UpdateWeaponDto } from './dto/update-weapon.dto';
@@ -26,5 +30,13 @@ export class WeaponsService {
 
   async deleteWeapon(id: number): Promise<Weapon> {
     return this.prisma.weapon.delete({ where: { id } });
+  }
+
+  async getAllWeaponsWithPages(
+    options: PageNumberPaginationOptions
+  ): Promise<[Weapon[], PageNumberPagination]> {
+    const pgWeapons = this.prisma.pg().weapon.paginate().withPages(options);
+
+    return pgWeapons;
   }
 }

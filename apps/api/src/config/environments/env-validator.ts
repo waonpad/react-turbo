@@ -17,10 +17,6 @@ export class EnvValidator {
   @IsNotEmpty()
   @IsString()
   DATABASE_URL: string;
-
-  @IsNotEmpty()
-  @IsString()
-  NEXTAUTH_SECRET: string;
 }
 
 /**

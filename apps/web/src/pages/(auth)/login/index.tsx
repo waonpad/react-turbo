@@ -2,7 +2,7 @@ import { useNavigate, useLocation, Path } from 'react-router-dom';
 
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
-import { useAuth } from '@/context/auth/use-auth';
+import { useAuth } from '@/auth/use-auth';
 
 export default function Login() {
   const { handleGoogleLogin } = useAuth();

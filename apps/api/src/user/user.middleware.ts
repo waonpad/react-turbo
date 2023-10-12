@@ -1,10 +1,8 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { NextFunction, Request, Response } from 'express';
-import { decode } from 'next-auth/jwt';
+import jet_decode, { InvalidTokenError } from 'jwt-decode';
 import { Env } from 'src/config/environments/env.service';
-
-// トークンを受け取り、でコードして、ユーザー情報をリクエストに追加する
-// @User user: AuthUserでアクセスできる
+import { JwtDecodedUser } from './jwt-decoded-user';
 
 @Injectable()
 export class UserMiddleware implements NestMiddleware {
@@ -14,19 +12,18 @@ export class UserMiddleware implements NestMiddleware {
     const token = req.headers.authorization?.split(' ')[1];
 
     try {
-      const decoded = await decode({
-        token: token,
-        secret: this.env.NextAuthSecret,
-      });
+      const decoded = jet_decode<JwtDecodedUser>(token);
 
       if (decoded?.sub) {
-        // sub is UserID
         req.user = decoded;
       }
 
       return next();
     } catch (err) {
-      console.log('UserMiddleware error', err);
+      if (!(err instanceof InvalidTokenError)) {
+        console.error('UserMiddleware error', err);
+      }
+
       return next();
     }
   }

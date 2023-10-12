@@ -13,13 +13,19 @@ export type Path =
   | `/posts/:id/:pid?`
   | `/posts/:id/deep`
   | `/private`
-  | `/splat/*`;
+  | `/splat/*`
+  | `/weapons`
+  | `/weapons/:id`
+  | `/weapons/:id/update`
+  | `/weapons/create`;
 
 export type Params = {
   '/posts/:id': { id: string };
   '/posts/:id/:pid?': { id: string; pid?: string };
   '/posts/:id/deep': { id: string };
   '/splat/*': { '*': string };
+  '/weapons/:id': { id: string };
+  '/weapons/:id/update': { id: string };
 };
 
 export type ModalPath = `/modal`;
