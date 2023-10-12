@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       token,
       user,
       login: (email: string) => {
-        setToken('token'), storage.set('token', 'a0731ae631bc01dea99f13b3f8ed48fc');
+        setToken('token'), storage.set('token', '--------------------------------');
         setUser({ email }), storage.set('user', { email });
       },
       logout: () => {
