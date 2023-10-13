@@ -3,17 +3,7 @@ const { execSync } = require('child_process');
 const processKill = {
   win32: (port) => {
     const command = `netstat -ano | findstr :${port}`;
-    const result = () => {
-      try {
-        return execSync(command).toString().trim().split('\n')[0];
-      } catch (e) {
-        return '';
-      }
-    };
-
-    if (!result()) {
-      return `No process on port ${port}`;
-    }
+    const result = execSync(command).toString().trim().split('\n')[0];
 
     const processId = result.split(' ').pop();
 
@@ -24,17 +14,7 @@ const processKill = {
   },
   darwin: (port) => {
     const command = `lsof -i :${port}`;
-    const result = () => {
-      try {
-        return execSync(command).toString().trim().split('\n')[1];
-      } catch (e) {
-        return '';
-      }
-    };
-
-    if (!result()) {
-      return `No process on port ${port}`;
-    }
+    const result = execSync(command).toString().trim().split('\n')[1];
 
     const processId = result.split(' ').pop();
 
@@ -45,17 +25,7 @@ const processKill = {
   },
   linux: (port) => {
     const command = `lsof -i :${port}`;
-    const result = () => {
-      try {
-        return execSync(command).toString().trim().split('\n')[1];
-      } catch (e) {
-        return '';
-      }
-    };
-
-    if (!result()) {
-      return `No process on port ${port}`;
-    }
+    const result = execSync(command).toString().trim().split('\n')[1];
 
     const processId = result.split(' ').pop();
 
@@ -75,11 +45,15 @@ const main = async () => {
     return;
   }
 
-  const res = processKill[process.platform](port);
+  try {
+    const res = processKill[process.platform](port);
 
-  console.log(res);
+    console.log(res);
 
-  console.log('Done');
+    console.log('Done');
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 main();
