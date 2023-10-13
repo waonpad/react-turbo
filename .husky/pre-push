@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# yarn test
-nps util.pkill.api; docker compose up -d; cd './apps/api'; dredd; cd '../../'; yarn test
+yarn test
