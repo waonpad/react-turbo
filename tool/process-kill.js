@@ -1,4 +1,5 @@
 const { execSync } = require('child_process');
+const { exit } = require('process');
 
 const processKill = {
   win32: (port) => {
@@ -52,7 +53,8 @@ const main = async () => {
 
     console.log('Done');
   } catch (e) {
-    console.error(e);
+    console.log('port is not used');
+    exit(0);
   }
 };
 
